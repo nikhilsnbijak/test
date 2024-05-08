@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Display Parameters</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1>Parameters</h1>
+  <ul id="paramsList"></ul>
+
+  <script>
+    // Function to get URL parameters
+    function getUrlParams() {
+      var params = {};
+      var url = window.location.href;
+      var urlSplit = url.split('?');
+      if (urlSplit.length > 1) {
+        var queryParams = urlSplit[1].split('&');
+        for (var i = 0; i < queryParams.length; i++) {
+          var param = queryParams[i].split('=');
+          var key = decodeURIComponent(param[0]);
+          var value = decodeURIComponent(param[1]);
+          params[key] = value;
+        }
+      }
+      return params;
+    }
+
+    // Function to display parameters
+    function displayParams() {
+      var params = getUrlParams();
+      var paramsList = document.getElementById('paramsList');
+      for (var key in params) {
+        var listItem = document.createElement('li');
+        listItem.textContent = key + ': ' + params[key];
+        paramsList.appendChild(listItem);
+      }
+    }
+
+    // Call the displayParams function when the page loads
+    displayParams();
+  </script>
+</body>
+</html>
